@@ -11,8 +11,10 @@ extend(geometry)
 const regular = import('@pmndrs/assets/fonts/inter_regular.woff')
 const medium = import('@pmndrs/assets/fonts/inter_medium.woff')
 
+let isZoomChangable = true
+
 export const App = () => (
-  <Canvas camera={{ fov: 75, position: [0, 0, 20] }} eventSource={document.getElementById('root')} eventPrefix="client">
+  <Canvas camera={{ fov: 75, position: [0, 0, 2] }} eventSource={document.getElementById('root')} eventPrefix="client">
     <color attach="background" args={['#f0f0f0']} />
     <Lens>
       <Frame id="01" name={`pick\nles`} author="Omar Faruq Tawsif" bg="#e4cdac" position={[-1.15, 0, 0]} rotation={[0, 0.5, 0]}>
@@ -61,14 +63,20 @@ function Frame({ id, name, author, bg, width = 1, height = 1.61803398875, childr
 function Rig({ position = new THREE.Vector3(0, 0, 2), focus = new THREE.Vector3(0, 0, 0) }) {
   const { controls, scene } = useThree()
   const [, params] = useRoute('/item/:id')
+  const viewport = useThree((state) => state.viewport)
+
   useEffect(() => {
     const active = scene.getObjectByName(params?.id)
     if (active) {
       active.parent.localToWorld(position.set(0, 0.5, 0.25))
       active.parent.localToWorld(focus.set(0, 0, -2))
+      isZoomChangable = true
+    } else {
+      isZoomChangable = false
     }
     controls?.setLookAt(...position.toArray(), ...focus.toArray(), true)
   })
+
   return <CameraControls makeDefault minPolarAngle={0} maxPolarAngle={Math.PI / 2} />
 }
 
@@ -77,16 +85,17 @@ function Lens({ children, damping = 0.15, ...props }) {
   // const { nodes } = useGLTF('/lens-transformed.glb')
   const buffer = useFBO()
   const viewport = useThree((state) => state.viewport)
+  const [curViewport, setCurViewport] = useState(viewport)
   const [scene] = useState(() => new THREE.Scene())
   useFrame((state, delta) => {
     // Tie lens to the pointer
     // getCurrentViewport gives us the width & height that would fill the screen in threejs units
     // By giving it a target coordinate we can offset these bounds, for instance width/height for a plane that
     // sits 15 units from 0/0/0 towards the camera (which is where the lens is)
-    const viewport = state.viewport.getCurrentViewport(state.camera, [0, 0, 20])
+    const viewport = state.viewport.getCurrentViewport(state.camera, [0, 0, 0])
     easing.damp3(
       ref.current.position,
-      [(state.pointer.x * viewport.width) / 2, (state.pointer.y * viewport.height) / 2, 15],
+      [(state.pointer.x * viewport.width) / 2, (state.pointer.y * viewport.height) / 2, 0],
       damping,
       delta
     )
@@ -99,10 +108,20 @@ function Lens({ children, damping = 0.15, ...props }) {
     state.gl.render(scene, state.camera)
     state.gl.setRenderTarget(null)
   })
+  
+  useEffect(() => {
+    console.log('lens viewport:: ', viewport, isZoomChangable)
+
+    // [TODO] support resize
+    if(isZoomChangable) {
+      setCurViewport(viewport)
+    }
+
+  }, [viewport])
   return (
     <>
       {createPortal(children, scene)}
-      <mesh scale={[viewport.width, viewport.height, 1]}>
+      <mesh scale={[curViewport.width, curViewport.height, 1]}>
         <planeGeometry />
         <meshBasicMaterial map={buffer.texture} />
       </mesh>
