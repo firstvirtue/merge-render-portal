@@ -14,22 +14,79 @@ const medium = import('@pmndrs/assets/fonts/inter_medium.woff')
 let isZoomChangable = true
 
 export const App = () => (
-  <Canvas camera={{ fov: 75, position: [0, 0, 2] }} eventSource={document.getElementById('root')} eventPrefix="client">
+  <Canvas camera={{ fov: 75, position: [0, 0, 2] }} >
+    <ScrollControls damping={0.2} pages={3} distance={0.5}>
     <color attach="background" args={['#f0f0f0']} />
-    <Lens>
-      <Frame id="01" name={`pick\nles`} author="Omar Faruq Tawsif" bg="#e4cdac" position={[-1.15, 0, 0]} rotation={[0, 0.5, 0]}>
-        <Gltf src="pickles_3d_version_of_hyuna_lees_illustration-transformed.glb" scale={8} position={[0, -0.7, -2]} />
-      </Frame>
-      <Frame id="02" name="tea" author="Omar Faruq Tawsif">
-        <Gltf src="fiesta_tea-transformed.glb" position={[0, -2, -3]} />
-      </Frame>
-      <Frame id="03" name="still" author="Omar Faruq Tawsif" bg="#d1d1ca" position={[1.15, 0, 0]} rotation={[0, -0.5, 0]}>
-        <Gltf src="still_life_based_on_heathers_artwork-transformed.glb" scale={2} position={[0, -0.8, -4]} />
-      </Frame>
-      <Rig />
-    </Lens>
+    {/* <Lens> */}
+      <Scroll>
+        {/* <Typography />
+        <Images /> */}
+        <Frame id="01" name={`pick\nles`} author="Omar Faruq Tawsif" bg="#e4cdac" position={[-1.15, 0, 0]} rotation={[0, 0.5, 0]}>
+          <Gltf src="pickles_3d_version_of_hyuna_lees_illustration-transformed.glb" scale={8} position={[0, -0.7, -2]} />
+        </Frame>
+        <Frame id="02" name="tea" author="Omar Faruq Tawsif">
+          <Gltf src="fiesta_tea-transformed.glb" position={[0, -2, -3]} />
+        </Frame>
+        <Frame id="03" name="still" author="Omar Faruq Tawsif" bg="#d1d1ca" position={[1.15, 0, 0]} rotation={[0, -0.5, 0]}>
+          <Gltf src="still_life_based_on_heathers_artwork-transformed.glb" scale={2} position={[0, -0.8, -4]} />
+        </Frame>
+      </Scroll>
+      <Scroll html>
+        <div style={{ transform: 'translate3d(65vw, 192vh, 0)' }}>
+          PMNDRS Pendant lamp
+          <br />
+          bronze, 38 cm
+          <br />
+          CHF 59.95
+          <br />
+        </div>
+      </Scroll>
+        
+      {/* TODOS.. */}
+      {/* <Rig /> */}
+    {/* </Lens> */}
+    </ScrollControls>
   </Canvas>
 )
+
+function Images() {
+  const group = useRef()
+  const data = useScroll()
+  const { width, height } = useThree((state) => state.viewport)
+  useFrame(() => {
+    group.current.children[0].material.zoom = 1 + data.range(0, 1 / 3) / 3
+    group.current.children[1].material.zoom = 1 + data.range(0, 1 / 3) / 3
+    group.current.children[2].material.zoom = 1 + data.range(1.15 / 3, 1 / 3) / 2
+    group.current.children[3].material.zoom = 1 + data.range(1.15 / 3, 1 / 3) / 2
+    group.current.children[4].material.zoom = 1 + data.range(1.15 / 3, 1 / 3) / 2
+    group.current.children[5].material.grayscale = 1 - data.range(1.6 / 3, 1 / 3)
+    group.current.children[6].material.zoom = 1 + (1 - data.range(2 / 3, 1 / 3)) / 3
+  })
+  return (
+    <group ref={group}>
+      <Image position={[-2, 0, 0]} scale={[4, height, 1]} url="/img1.jpg" />
+      <Image position={[2, 0, 3]} scale={3} url="/img6.jpg" />
+      <Image position={[-2.05, -height, 6]} scale={[1, 3, 1]} url="/trip2.jpg" />
+      <Image position={[-0.6, -height, 9]} scale={[1, 2, 1]} url="/img8.jpg" />
+      <Image position={[0.75, -height, 10.5]} scale={1.5} url="/trip4.jpg" />
+      <Image position={[0, -height * 1.5, 7.5]} scale={[1.5, 3, 1]} url="/img3.jpg" />
+      <Image position={[0, -height * 2 - height / 4, 0]} scale={[width, height / 1.1, 1]} url="/img7.jpg" />
+    </group>
+  )
+}
+
+function Typography() {
+  const state = useThree()
+  const { width, height } = state.viewport.getCurrentViewport(state.cameta, [0, 0, 12])
+  const shared = { font: '/Inter-Regular.woff', letterSpacing: -0.1, color: 'black' }
+  return (
+    <>
+      <Text children="to" anchorX="left" position={[-width / 2.5, -height / 10, 12]} {...shared} />
+      <Text children="be" anchorX="right" position={[width / 2.5, -height * 2, 12]} {...shared} />
+      <Text children="home" position={[0, -height * 4.624, 12]} {...shared} />
+    </>
+  )
+}
 
 function Frame({ id, name, author, bg, width = 1, height = 1.61803398875, children, ...props }) {
   const portal = useRef()
