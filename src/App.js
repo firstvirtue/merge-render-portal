@@ -14,7 +14,7 @@ const medium = import('@pmndrs/assets/fonts/inter_medium.woff')
 let isZoomChangable = true
 
 export const App = () => (
-  <Canvas camera={{ fov: 75, position: [0, 0, 2], focus: [0, 0, 0] }} >
+  <Canvas camera={{ fov: 75, position: [0, 0, 2], focus: [0, 0, 0] }}>
     <ScrollControls damping={0.2} pages={3} distance={0.5}>
     <color attach="background" args={['#f0f0f0']} />
     {/* <Lens> */}
@@ -124,7 +124,7 @@ function Rig({ position = new THREE.Vector3(0, 0, 2), focus = new THREE.Vector3(
   const [enabled, setEnabled] = useState(false)
 
   useEffect(() => {
-    console.log('viewport:: ', viewport)
+    // console.log('viewport:: ', viewport)
   }, [viewport])
 
   useEffect(() => {
@@ -140,6 +140,7 @@ function Rig({ position = new THREE.Vector3(0, 0, 2), focus = new THREE.Vector3(
       isZoomChangable = false
       setTimeout(() => {
         setEnabled(false)
+        // console.log(viewport.getCurrentViewport())
       }, 1000)
     }
     controls?.setLookAt(...position.toArray(), ...focus.toArray(), true)
@@ -148,7 +149,7 @@ function Rig({ position = new THREE.Vector3(0, 0, 2), focus = new THREE.Vector3(
   return <CameraControls enabled={enabled} makeDefault minPolarAngle={0} maxPolarAngle={Math.PI / 2} 
   onChange={(e) => {
     // console.log(e)
-    console.log(viewport)
+    console.log('viewport::', viewport, viewport.getCurrentViewport())
   }}
   />
 }
@@ -184,9 +185,9 @@ function Lens({ children, damping = 0.15, ...props }) {
   
   useEffect(() => {
     console.log('lens viewport:: ', viewport, isZoomChangable)
-
-    // [TODO] support resize
-    if(isZoomChangable) {
+ 
+    // [TODO] viewport.getCurrentViewport()
+    if(isZoomChangable) { 
       setCurViewport(viewport)
     }
 
