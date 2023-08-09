@@ -20,7 +20,7 @@ export const App = () => (
     {/* <Lens> */}
       <Scroll>
         {/* <Typography /> */}
-        {/* <Images /> */}
+        <Images />
         <Frame id="01" name={`pick\nles`} author="Omar Faruq Tawsif" bg="#e4cdac" position={[-1.15, 0, 0]} rotation={[0, 0.5, 0]}>
           <Gltf src="pickles_3d_version_of_hyuna_lees_illustration-transformed.glb" scale={8} position={[0, -0.7, -2]} />
         </Frame>
@@ -118,16 +118,22 @@ function Frame({ id, name, author, bg, width = 1, height = 1.61803398875, childr
 }
 
 function Rig({ position = new THREE.Vector3(0, 0, 2), focus = new THREE.Vector3(0, 0, 0) }) {
-  const { controls, scene } = useThree()
+  const { controls, scene, camera } = useThree()
   const [, params] = useRoute('/item/:id')
   const viewport = useThree((state) => state.viewport)
   const [enabled, setEnabled] = useState(false)
+
+  useEffect(() => {
+    console.log('viewport:: ', viewport)
+  }, [viewport])
 
   useEffect(() => {
     const active = scene.getObjectByName(params?.id)
     if (active) {
       active.parent.localToWorld(position.set(0, 0.5, 0.25))
       active.parent.localToWorld(focus.set(0, 0, -2))
+      // position.set(0, 0.5, 0.25)
+      // focus.set(0, 0, -2)
       isZoomChangable = true
       setEnabled(true)
     } else {
@@ -139,7 +145,12 @@ function Rig({ position = new THREE.Vector3(0, 0, 2), focus = new THREE.Vector3(
     controls?.setLookAt(...position.toArray(), ...focus.toArray(), true)
   })
 
-  return <CameraControls enabled={enabled} makeDefault minPolarAngle={0} maxPolarAngle={Math.PI / 2} />
+  return <CameraControls enabled={enabled} makeDefault minPolarAngle={0} maxPolarAngle={Math.PI / 2} 
+  onChange={(e) => {
+    // console.log(e)
+    console.log(viewport)
+  }}
+  />
 }
 
 function Lens({ children, damping = 0.15, ...props }) {
