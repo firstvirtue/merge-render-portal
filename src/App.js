@@ -18,19 +18,11 @@ export const App = () => (
     <ScrollControls damping={0.2} pages={3} distance={0.5}>
     <color attach="background" args={['#f0f0f0']} />
     {/* <Lens> */}
-      <Scroll>
+      {/* <Scroll> */}
         {/* <Typography /> */}
-        <Images />
-        <Frame id="01" name={`pick\nles`} author="Omar Faruq Tawsif" bg="#e4cdac" position={[-1.15, 0, 0]} rotation={[0, 0.5, 0]}>
-          <Gltf src="pickles_3d_version_of_hyuna_lees_illustration-transformed.glb" scale={8} position={[0, -0.7, -2]} />
-        </Frame>
-        <Frame id="02" name="tea" author="Omar Faruq Tawsif">
-          <Gltf src="fiesta_tea-transformed.glb" position={[0, -2, -3]} />
-        </Frame>
-        <Frame id="03" name="still" author="Omar Faruq Tawsif" bg="#d1d1ca" position={[1.15, 0, 0]} rotation={[0, -0.5, 0]}>
-          <Gltf src="still_life_based_on_heathers_artwork-transformed.glb" scale={2} position={[0, -0.8, -4]} />
-        </Frame>
-      </Scroll>
+        {/* <Images /> */}
+        <Frames />
+      {/* </Scroll> */}
       <Scroll html>
         <div style={{ transform: 'translate3d(65vw, 192vh, 0)' }}>
           PMNDRS Pendant lamp
@@ -43,11 +35,38 @@ export const App = () => (
       </Scroll>
         
       {/* TODOS.. */}
-      <Rig />
     {/* </Lens> */}
     </ScrollControls>
   </Canvas>
 )
+
+function Frames() {
+  const group = useRef()
+  const scroll = useScroll()
+  const viewport = useThree((state) => state.viewport)
+
+  useFrame(() => {
+    // console.log(scroll.offset)
+    // [TODO] merge dimension
+    group.current.position.y = scroll.offset
+  })
+
+  return (
+    <group ref={group}>
+        <Frame id="01" name={`pick\nles`} author="Omar Faruq Tawsif" bg="#e4cdac" position={[-1.15, 0, 0]} rotation={[0, 0.5, 0]}>
+          <Gltf src="pickles_3d_version_of_hyuna_lees_illustration-transformed.glb" scale={8} position={[0, -0.7, -2]} />
+        </Frame>
+        <Frame id="02" name="tea" author="Omar Faruq Tawsif">
+          <Gltf src="fiesta_tea-transformed.glb" position={[0, -2, -3]} />
+        </Frame>
+        <Frame id="03" name="still" author="Omar Faruq Tawsif" bg="#d1d1ca" position={[1.15, 0, 0]} rotation={[0, -0.5, 0]}>
+          <Gltf src="still_life_based_on_heathers_artwork-transformed.glb" scale={2} position={[0, -0.8, -4]} />
+        </Frame>
+
+        <Rig />
+    </group>
+  )
+}
 
 function Images() {
   const group = useRef()
@@ -77,7 +96,7 @@ function Images() {
 
 function Typography() {
   const state = useThree()
-  const { width, height } = state.viewport.getCurrentViewport(state.cameta, [0, 0, 12])
+  const { width, height } = state.viewport.getCurrentViewport(state.camera, [0, 0, 12])
   const shared = { font: '/Inter-Regular.woff', letterSpacing: -0.1, color: 'black' }
   return (
     <>
@@ -149,7 +168,7 @@ function Rig({ position = new THREE.Vector3(0, 0, 2), focus = new THREE.Vector3(
   return <CameraControls enabled={enabled} makeDefault minPolarAngle={0} maxPolarAngle={Math.PI / 2} 
   onChange={(e) => {
     // console.log(e)
-    console.log('viewport::', viewport, viewport.getCurrentViewport())
+    // console.log('viewport::', viewport, viewport.getCurrentViewport())
   }}
   />
 }
