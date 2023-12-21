@@ -17,19 +17,19 @@ export const App = () => {
       <div style={{height: '90vh'}}>
       <Canvas camera={{ fov: 70, position: [0, 0, 20] }} eventSource={document.getElementById('root')} eventPrefix="client">
         <color attach="background" args={['#f0f0f0']} />
-        <Frame id="01" name={`pick\nles`} author="Omar Faruq Tawsif" bg="#e4cdac" position={[-2.15, 0, 0]} rotation={[0, 0.5, 0]}>
+        <Frame id="01" name={`pick\nles`} author="Omar Faruq Tawsif" bg="#e4cdac" position={[-1.15, 0, 0]} rotation={[0, 0.5, 0]}>
           <group>
             <Sky />
-            <FBOParticles />
+            {/* <FBOParticles /> */}
             <Gltf src="pickles_3d_version_of_hyuna_lees_illustration-transformed.glb" scale={8} position={[0, -0.7, -2]} />
           </group>
         </Frame>
-        <Frame id="02" name="tea" author="Omar Faruq Tawsif">
+        <Frame id="02" name="tea" author="Omar Faruq Tawsif" position={[1, 0, 0]}>
           <Gltf src="fiesta_tea-transformed.glb" position={[0, -2, -3]} />
         </Frame>
-        <Frame id="03" name="still" author="Omar Faruq Tawsif" bg="#d1d1ca" position={[2.15, -1, 0]} rotation={[0, -0.5, 0]}>
+        {/* <Frame id="03" name="still" author="Omar Faruq Tawsif" bg="#d1d1ca" position={[2.15, -1, 0]} rotation={[0, -0.5, 0]}>
           <Gltf src="still_life_based_on_heathers_artwork-transformed.glb" scale={2} position={[0, -0.8, -4]} />
-        </Frame>
+        </Frame> */}
         <Rig />
       </Canvas>
       </div>
@@ -37,12 +37,12 @@ export const App = () => {
   )
 }
 
-function Frame({ id, name, author, bg, width = 2.45, height = 1.61803398875, children, ...props }) {
+function Frame({ id, name, author, bg, width = 1.5, height = 1.61803398875, children, ...props }) {
   const portal = useRef()
   const [, setLocation] = useLocation()
   const [, params] = useRoute('/item/:id')
   const [hovered, hover] = useState(false)
-  useCursor(hovered)
+  // useCursor(hovered)
   useFrame((state, dt) => easing.damp(portal.current, 'blend', params?.id === id ? 1 : 0, 0.2, dt))
   return (
     <group {...props}>
@@ -55,7 +55,9 @@ function Frame({ id, name, author, bg, width = 2.45, height = 1.61803398875, chi
       <Text font={suspend(regular).default} fontSize={0.04} anchorX="right" position={[0.0, -0.677, 0.01]} material-toneMapped={false}>
         {author}
       </Text>
-      <mesh name={id} onClick={(e) => (e.stopPropagation(), setLocation('/item/' + e.object.name))} onPointerOver={(e) => hover(true)} onPointerOut={() => hover(false)}>
+      <mesh name={id} onClick={(e) => (e.stopPropagation(), setLocation('/item/' + e.object.name))} 
+      // onPointerOver={(e) => hover(true)} onPointerOut={() => hover(false)}
+      >
         <roundedPlaneGeometry args={[width, height, 0.1]} />
         <MeshPortalMaterial ref={portal} events={params?.id === id} side={THREE.DoubleSide}>
           <color attach="background" args={[bg]} />
