@@ -16,7 +16,7 @@ body,
 body {
   background: #f0f0f0;
   color: black;
-  font-family: 'Inter';
+  font-family: 'Mori', 'Pretendard', sans-serif;
 }
 
 a {
@@ -85,4 +85,11 @@ header {
   height: 1.5rem;
   border: 1px solid black;
   border-radius: 50%;
+}
+
+.slogan {
+  font-weight: 700;
+  font-size: 7rem;
+  text-align: center;
+  padding-top: 5rem;
 }

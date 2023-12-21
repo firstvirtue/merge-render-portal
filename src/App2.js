@@ -33,6 +33,12 @@ export const App = () => {
         <Rig />
       </Canvas>
       </div>
+
+      <p className='slogan'>
+        Hello world <br/>
+        No Code No Life <br/>
+        Generate AI Change the World!
+      </p>
     </div>
   )
 }
