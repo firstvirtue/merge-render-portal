@@ -14,7 +14,7 @@ const medium = import('@pmndrs/assets/fonts/inter_medium.woff')
 export const App = () => {
   return (
     <div style={{height: '300vh'}}>
-      <div style={{height: '100vh'}}>
+      <div style={{height: '90vh'}}>
       <Canvas camera={{ fov: 70, position: [0, 0, 20] }} eventSource={document.getElementById('root')} eventPrefix="client">
         <color attach="background" args={['#f0f0f0']} />
         <Frame id="01" name={`pick\nles`} author="Omar Faruq Tawsif" bg="#e4cdac" position={[-2.15, 0, 0]} rotation={[0, 0.5, 0]}>
