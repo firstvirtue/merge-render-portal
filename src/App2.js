@@ -6,6 +6,7 @@ import { useRoute, useLocation } from 'wouter'
 import { easing, geometry } from 'maath'
 import { suspend } from 'suspend-react'
 import FBOParticles from './fboBox/FBOCanvas'
+import FisheyeScene from './FisheyeScene'
 
 extend(geometry)
 const regular = import('@pmndrs/assets/fonts/inter_regular.woff')
@@ -21,6 +22,7 @@ export const App = () => {
           <group>
             <Sky />
             {/* <FBOParticles /> */}
+            <FisheyeScene />
             <Gltf src="pickles_3d_version_of_hyuna_lees_illustration-transformed.glb" scale={8} position={[0, -0.7, -2]} />
           </group>
         </Frame>
@@ -37,7 +39,7 @@ export const App = () => {
       <p className='slogan'>
         Hello world <br/>
         No Code No Life <br/>
-        Generate AI Change the World!
+        Generate AI <br/>Change the World!
       </p>
     </div>
   )
