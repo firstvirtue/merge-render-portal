@@ -3,8 +3,17 @@ import { useRoute, useLocation } from 'wouter'
 import './fonts.css'
 import './styles.css'
 import { Logo } from '@pmndrs/branding'
+
+// prototype with scroll
 // import { App } from './App'
-import { App } from './App2'
+
+// prototype layout, add models
+// import { App } from './App2'
+
+// webgl scene
+import { App } from './SceneVehicles'
+
+
 import { Header } from './components/Header'
 
 /*

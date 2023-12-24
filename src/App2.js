@@ -27,7 +27,10 @@ export const App = () => {
           </group>
         </Frame>
         <Frame id="02" name="tea" author="Omar Faruq Tawsif" position={[1, 0, 0]}>
-          <Gltf src="fiesta_tea-transformed.glb" position={[0, -2, -3]} />
+          <group>
+            <Gltf src="/assets/model/jeep.glb" scale={1} position={[0, 0, 0]} />
+            <Gltf src="fiesta_tea-transformed.glb" position={[0, -2, -3]} />
+          </group>
         </Frame>
         {/* <Frame id="03" name="still" author="Omar Faruq Tawsif" bg="#d1d1ca" position={[2.15, -1, 0]} rotation={[0, -0.5, 0]}>
           <Gltf src="still_life_based_on_heathers_artwork-transformed.glb" scale={2} position={[0, -0.8, -4]} />
@@ -91,6 +94,5 @@ function Rig({ position = new THREE.Vector3(0, 0, 2), focus = new THREE.Vector3(
     controls && (controls.mouseButtons.wheel = 0)
   })
 
-  return <CameraControls makeDefault minPolarAngle={0} maxPolarAngle={Math.PI / 2} 
-  />
+  return <CameraControls makeDefault minPolarAngle={0} maxPolarAngle={Math.PI / 2} />
 }
