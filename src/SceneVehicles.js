@@ -5,8 +5,10 @@ import { useCursor, MeshPortalMaterial, CameraControls, Gltf, Text, Sky, Cloud }
 import { useRoute, useLocation } from 'wouter'
 import { easing, geometry } from 'maath'
 import { suspend } from 'suspend-react'
+import { Physics, Debug } from '@react-three/cannon';
 import FBOParticles from './fboBox/FBOCanvas'
 import FisheyeScene from './FisheyeScene'
+// import Vehicle from './components/vehicle'
 
 extend(geometry)
 const regular = import('@pmndrs/assets/fonts/inter_regular.woff')
@@ -23,6 +25,10 @@ export const App = () => {
       <group>
         <Gltf src="/assets/model/jeep.glb" scale={1} position={[0, 0, 0]} />
       </group>
+
+      <Physics>
+        {/* <Vehicle world={world} /> */}
+      </Physics>
       
       <Rig />
     </Canvas>
