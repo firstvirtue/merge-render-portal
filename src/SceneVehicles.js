@@ -8,7 +8,7 @@ import { suspend } from 'suspend-react'
 import { Physics, Debug } from '@react-three/cannon';
 import FBOParticles from './fboBox/FBOCanvas'
 import FisheyeScene from './FisheyeScene'
-// import Vehicle from './components/vehicle'
+import Vehicle from './components/vehicle'
 
 extend(geometry)
 const regular = import('@pmndrs/assets/fonts/inter_regular.woff')
@@ -27,7 +27,18 @@ export const App = () => {
       </group>
 
       <Physics>
-        {/* <Vehicle world={world} /> */}
+        {/* Ground plane */}
+          <mesh receiveShadow>
+            <planeBufferGeometry args={[100, 100]} />
+            <shadowMaterial opacity={0.5} />
+          </mesh>
+
+          {/* Ramp plane */}
+          <mesh receiveShadow position={[5, 1, 0]} rotation={[0, 0, -0.5]}>
+            <planeBufferGeometry args={[10, 2]} />
+            <meshStandardMaterial color="green" />
+          </mesh>
+        <Vehicle />
       </Physics>
       
       <Rig />
