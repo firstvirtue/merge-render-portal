@@ -19,25 +19,28 @@ export const App = () => {
     <div style={{height: '90vh'}}>
     <Canvas id='freg' camera={{ fov: 70, position: [0, 0, 20] }} eventSource={document.getElementById('root')} eventPrefix="client">
       <color attach="background" args={['#f0f0f0']} />        
-      <ambientLight intensity={0.1} />
-      <directionalLight color="red" position={[0, 0, 5]} />
+      <ambientLight intensity={0.5} />
+      <directionalLight color="white" position={[0, 0, 5]} />
       <Sky />
-      <group>
-        <Gltf src="/assets/model/jeep.glb" scale={1} position={[0, 0, 0]} />
+      <Gltf src="/assets/model/jeep.glb" scale={1} position={[0, 0, 0]} />
+      <group position={[0, 0, 50]}>
+
+        <Gltf src="/assets/model/terrain.003.glb" scale={1} position={[0, 0, 0]} />
+        <Gltf src="/assets/model/terrain.004.glb" scale={1} position={[0, 0, 0]} />
+        <Gltf src="/assets/model/terrain.002.glb" scale={1} position={[0, 0, 0]} />
+        <Gltf src="/assets/model/eiffel.glb" scale={1} position={[0, 0, 0]} />
+        <Gltf src="/assets/model/wheel.glb" scale={1} position={[10, 0, 10]} />
+        <Gltf src="/assets/model/europe.glb" scale={1} position={[0, 0, 0]} />
       </group>
 
       <Physics>
         {/* Ground plane */}
-          <mesh receiveShadow>
-            <planeBufferGeometry args={[100, 100]} />
-            <shadowMaterial opacity={0.5} />
-          </mesh>
 
           {/* Ramp plane */}
-          <mesh receiveShadow position={[5, 1, 0]} rotation={[0, 0, -0.5]}>
+          {/* <mesh receiveShadow position={[5, 1, 0]} rotation={[0, 0, -0.5]}>
             <planeBufferGeometry args={[10, 2]} />
             <meshStandardMaterial color="green" />
-          </mesh>
+          </mesh> */}
         <Vehicle />
       </Physics>
       
@@ -47,7 +50,7 @@ export const App = () => {
   )
 }
 
-function Rig({ position = new THREE.Vector3(0, 0, 2), focus = new THREE.Vector3(0, 0, 0) }) {
+function Rig({ position = new THREE.Vector3(0, 0, 10), focus = new THREE.Vector3(0, 0, 0) }) {
   const { controls, scene } = useThree()
   const [, params] = useRoute('/item/:id')
   useEffect(() => {

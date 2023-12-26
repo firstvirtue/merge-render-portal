@@ -7,7 +7,7 @@ import { Logo } from '@pmndrs/branding'
 // prototype with scroll
 // import { App } from './App'
 
-// prototype layout, add models
+// [!] prototype layout, add models
 // import { App } from './App2'
 
 // webgl scene
