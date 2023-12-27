@@ -47,7 +47,7 @@ const Vehicle = ({ radius = 0.2, width = 0.3, height = 0, front = 0.38, back = -
     indexUpAxis: 1
   }));
 
-  const { yaw } = useFollowCam(chassis, [0, 4, 1.5])
+  const { yaw } = useFollowCam(chassis, [0, 3, 0.5])
 
   const resetCar = () => {
     chassis.current.api.position.set(0, 0.5, 0);
@@ -73,34 +73,13 @@ const Vehicle = ({ radius = 0.2, width = 0.3, height = 0, front = 0.38, back = -
 
   return (
     <>
-    <group ref={vehicle} position={[0, 0, 0]}>
-      <Drifter ref={chassis} rotation={props.rotation} position={props.position} angularVelocity={props.angularVelocity} />
-      <Wheel ref={wheel1} radius={radius} leftSide />
-      <Wheel ref={wheel2} radius={radius} />
-      <Wheel ref={wheel3} radius={radius} leftSide />
-      <Wheel ref={wheel4} radius={radius} />
-    </group>
-      
-      {/* <Gltf src="/assets/model/wheel.glb" position={[10, 0, 10]} /> */}
-      {/* <mesh ref={planeRef}>
-        <planeBufferGeometry args={[50, 50]} />
-        <meshStandardMaterial color="green" />
-      </mesh>
-
-      <mesh ref={ref}>
-        <boxBufferGeometry args={[2, 1, 4]} />
-        <meshStandardMaterial color="blue" />
-      </mesh>
-
-      <mesh ref={wheel1Ref} position={[1, 0.5, 1]}>
-        <cylinderBufferGeometry args={[0.5, 0.5, 0.2, 32]} />
-        <meshStandardMaterial color="red" />
-      </mesh>
-
-      <mesh ref={wheel2Ref} position={[-1, 0.5, 1]}>
-        <cylinderBufferGeometry args={[0.5, 0.5, 0.2, 32]} />
-        <meshStandardMaterial color="red" />
-      </mesh> */}
+      <group ref={vehicle} position={[0, 0, 0]}>
+        <Drifter ref={chassis} rotation={props.rotation} position={props.position} angularVelocity={props.angularVelocity} />
+        <Wheel ref={wheel1} radius={radius} leftSide />
+        <Wheel ref={wheel2} radius={radius} />
+        <Wheel ref={wheel3} radius={radius} leftSide />
+        <Wheel ref={wheel4} radius={radius} />
+      </group>
     </>
   );
 };
