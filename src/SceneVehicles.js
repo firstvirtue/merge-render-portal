@@ -22,18 +22,18 @@ export const App = () => {
       <ambientLight intensity={0.5} />
       <directionalLight color="white" position={[0, 0, 5]} />
       <Sky />
-      <Gltf src="/assets/model/jeep.glb" scale={1} position={[0, 0, 0]} />
-      <group position={[0, 0, 50]}>
+      <group position={[0, -1, 50]}>
 
         <Gltf src="/assets/model/terrain.003.glb" scale={1} position={[0, 0, 0]} />
         <Gltf src="/assets/model/terrain.004.glb" scale={1} position={[0, 0, 0]} />
         <Gltf src="/assets/model/terrain.002.glb" scale={1} position={[0, 0, 0]} />
         <Gltf src="/assets/model/eiffel.glb" scale={1} position={[0, 0, 0]} />
-        <Gltf src="/assets/model/wheel.glb" scale={1} position={[10, 0, 10]} />
+        
         <Gltf src="/assets/model/europe.glb" scale={1} position={[0, 0, 0]} />
       </group>
 
       <Physics>
+        {/* <Debug> */}
         {/* Ground plane */}
 
           {/* Ramp plane */}
@@ -41,7 +41,8 @@ export const App = () => {
             <planeBufferGeometry args={[10, 2]} />
             <meshStandardMaterial color="green" />
           </mesh> */}
-        <Vehicle />
+        <Vehicle position={[0, 2, 0]} rotation={[0, -Math.PI / 4, 0]} angularVelocity={[0, 1, 0]} wheelRadius={2} />
+        {/* </Debug> */}
       </Physics>
       
       <Rig />
@@ -50,7 +51,7 @@ export const App = () => {
   )
 }
 
-function Rig({ position = new THREE.Vector3(0, 0, 10), focus = new THREE.Vector3(0, 0, 0) }) {
+function Rig({ position = new THREE.Vector3(0, 2, 10), focus = new THREE.Vector3(0, 0, 0) }) {
   const { controls, scene } = useThree()
   const [, params] = useRoute('/item/:id')
   useEffect(() => {
