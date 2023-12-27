@@ -5,6 +5,7 @@ import { Gltf } from '@react-three/drei'
 import { useControls } from './utils/useControls';
 import Wheel from './wheel';
 import Drifter from './drifter';
+import useFollowCam from './utils/useFollowCam'
 
 const Vehicle = ({ radius = 0.2, width = 0.3, height = 0, front = 0.38, back = -0.35, steer = 0.6, force = 2000, maxBrake = 1e5, ...props }) => {
   const [planeRef] = usePlane(() => ({ mass: 0, position: [0, -1, 0], rotation: [Math.PI / -2, 0, 0]}))
@@ -45,6 +46,8 @@ const Vehicle = ({ radius = 0.2, width = 0.3, height = 0, front = 0.38, back = -
     indexRightAxis: 0,
     indexUpAxis: 1
   }));
+
+  const { yaw } = useFollowCam(chassis, [0, 4, 1.5])
 
   const resetCar = () => {
     chassis.current.api.position.set(0, 0.5, 0);
