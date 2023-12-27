@@ -51,7 +51,12 @@ export default function useFollowCam(ref, offset) {
 
   useFrame((_, delta) => {
     ref.current.getWorldPosition(worldPosition)
-    pivot.position.lerp(worldPosition, delta * 5)
+
+    // [NOTE] lerp 사용 시 프레임 끊김.
+    // pivot.position.lerp(worldPosition, delta * 10)
+
+    pivot.position.copy(worldPosition)
+    _.camera.lookAt(worldPosition)
   })
 
   return { pivot, alt, yaw, pitch }

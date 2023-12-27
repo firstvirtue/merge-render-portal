@@ -33,7 +33,7 @@ export const App = () => {
       </group>
 
       <Physics>
-        {/* <Debug> */}
+        <Debug>
         {/* Ground plane */}
 
           {/* Ramp plane */}
@@ -42,7 +42,7 @@ export const App = () => {
             <meshStandardMaterial color="green" />
           </mesh> */}
         <Vehicle position={[0, 2, 0]} rotation={[0, -Math.PI / 4, 0]} angularVelocity={[0, 1, 0]} wheelRadius={2} />
-        {/* </Debug> */}
+        </Debug>
       </Physics>
       
       <Rig />
