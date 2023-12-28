@@ -11,7 +11,7 @@ import { Logo } from '@pmndrs/branding'
 // import { App } from './App2'
 
 // webgl scene
-import { App } from './SceneVehicles'
+import { App } from './SceneVehicles.tsx'
 
 
 import { Header } from './components/Header'
