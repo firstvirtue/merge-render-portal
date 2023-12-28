@@ -7,6 +7,7 @@ import { easing, geometry } from 'maath'
 import { suspend } from 'suspend-react'
 import FBOParticles from './fboBox/FBOCanvas'
 import FisheyeScene from './FisheyeScene'
+import { AppScene } from './components/scene/index.tsx'
 
 extend(geometry)
 const regular = import('@pmndrs/assets/fonts/inter_regular.woff')
@@ -27,10 +28,7 @@ export const App = () => {
           </group>
         </Frame>
         <Frame id="02" name="tea" author="Omar Faruq Tawsif" position={[1, 0, 0]}>
-          <group>
-            <Gltf src="/assets/model/jeep.glb" scale={1} position={[0, 0, 0]} />
-            <Gltf src="fiesta_tea-transformed.glb" position={[0, -2, -3]} />
-          </group>
+          <AppScene />
         </Frame>
         {/* <Frame id="03" name="still" author="Omar Faruq Tawsif" bg="#d1d1ca" position={[2.15, -1, 0]} rotation={[0, -0.5, 0]}>
           <Gltf src="still_life_based_on_heathers_artwork-transformed.glb" scale={2} position={[0, -0.8, -4]} />
