@@ -7,7 +7,7 @@ import Wheel from './wheel';
 import Drifter from './drifter';
 import useFollowCam from './utils/useFollowCam'
 
-const Vehicle = ({ radius = 0.2, width = 0.3, height = 0, front = 0.38, back = -0.35, steer = 0.6, force = 2000, maxBrake = 1e5, ...props }) => {
+const Vehicle = ({ radius = 0.2, width = 0.3, height = 0, front = 0.38, back = -0.35, steer = 0.6, force = 4000, maxBrake = 1e5, ...props }) => {
   const [planeRef] = usePlane(() => ({ mass: 0, position: [0, -1, 0], rotation: [Math.PI / -2, 0, 0]}))
 
   const chassis = useRef();

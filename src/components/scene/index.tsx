@@ -1,12 +1,13 @@
 import * as THREE from 'three'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useMemo } from 'react'
 import { Canvas, extend, useFrame, useThree } from '@react-three/fiber'
 import { useCursor, MeshPortalMaterial, CameraControls, useGLTF, Gltf, Text, Sky, Cloud } from '@react-three/drei'
 import { useRoute, useLocation } from 'wouter'
 import { easing, geometry } from 'maath'
 import { suspend } from 'suspend-react'
 import type { TrimeshProps } from '@react-three/cannon';
-import { Physics, Debug, useCylinder, useTrimesh } from '@react-three/cannon';
+import { Physics, Debug, useCylinder, useTrimesh, useConvexPolyhedron } from '@react-three/cannon';
+import { Geometry } from "three-stdlib";
 import Vehicle from '../vehicle'
 
 // extend(geometry)
@@ -34,26 +35,34 @@ type TerrainGLTF = GLTF & {
 //   play: () => set({ isPaused: false }),
 // }))
 
+function toConvexProps(bufferGeometry) {
+  const geo = new Geometry().fromBufferGeometry(bufferGeometry);
+  // Merge duplicate vertices resulting from glTF export.
+  // Cannon assumes contiguous, closed meshes to work
+  geo.mergeVertices();
+  return [geo.vertices.map((v) => [v.x, v.y, v.z]), geo.faces.map((f) => [f.a, f.b, f.c]), []]; // prettier-ignore
+}
+
 const Terrain = ({ position }: Pick<TrimeshProps, 'position'>) => {
-  const { scene } = useGLTF('/assets/model/terrain.003.glb')
-  console.log('scene:: ', scene)
+  // const { scene } = useGLTF('/assets/model/terrain.002.glb')
+  // console.log('scene:: ', scene)
 
-  // const {
-  //   nodes: {
-  //     terrain003: { geometry },
-  //   },
-  // } = useGLTF('/assets/model/terrain.003.glb') as TerrainGLTF
+  const {
+    nodes: {
+      MtFuji_low: { geometry },
+    },
+  } = useGLTF('/assets/model/Fuji.glb') as TerrainGLTF
 
+  // const { nodes } = useGLTF("/assets/model/Fuji.glb");
 
+  
   const {
     attributes: {
       position: { array: vertices },
     },
     index: { array: indices },
-  } = scene.children[0].geometry
+  } = geometry
 
-  // const [hovered, setHover] = useState(false)
-  // const { isPaused } = useStore()
 
   const [ref] = useTrimesh(
     () => ({
@@ -64,21 +73,27 @@ const Terrain = ({ position }: Pick<TrimeshProps, 'position'>) => {
     useRef<Mesh>(null),
   )
 
+  // const [hovered, setHover] = useState(false)
+  // const { isPaused } = useStore()
+
+  // const geo = useMemo(() => toConvexProps(nodes.MtFuji_low.geometry), [nodes]);
+  // const [ref] = useConvexPolyhedron(() => ({ mass: 100, ...props, args: geo }));
+
   return (
 
-    // <mesh
-    //   ref={ref}
-    //   geometry={geometry}
-    // >
-    //   <meshStandardMaterial color={'white'} />
-    // </mesh>
-
-    <primitive
+    <mesh
       ref={ref}
-      object={scene}
+      geometry={geometry}
     >
-      {/* <meshStandardMaterial color={'green'} /> */}
-    </primitive>
+      <meshStandardMaterial color={'white'} />
+    </mesh>
+
+    // <primitive
+    //   ref={ref}
+    //   object={nodes}
+    // >
+    //   <meshStandardMaterial color={'green'} />
+    // </primitive>
   )
 }
 
@@ -142,9 +157,9 @@ export const AppScene = () => {
           <group>
           <Box position={[-11, 1, 12]} userData={{ id: 'box-1', health: 80 }}/>
           </group>
-          <Terrain position={[-6, 0, 13]} />
+          <Terrain position={[-6, -1, 13]} />
+          
           <group position={[0, -1, 50]}>
-            {/* <Gltf src="/assets/model/terrain.003.glb" scale={1} position={[0, 0, 0]} /> */}
             <Gltf src="/assets/model/terrain.004.glb" scale={1} position={[0, 0, 0]} />
             <Gltf src="/assets/model/terrain.002.glb" scale={1} position={[0, 0, 0]} />
             {/* <Gltf src="/assets/model/eiffel.glb" scale={1} position={[0, 0, 0]} /> */}

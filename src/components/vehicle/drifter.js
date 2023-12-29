@@ -11,7 +11,7 @@ import { useGLTF } from '@react-three/drei';
 import { useBox } from '@react-three/cannon';
 import { Gltf } from '@react-three/drei'
 
-const Drifter = forwardRef(({ args = [0.5, 0.5, 1.4], mass = 500, setVisible, ...props }, ref) => {
+const Drifter = forwardRef(({ args = [0.5, 0.5, 1.4], mass = 1500, setVisible, ...props }, ref) => {
   
 
   const [, api] = useBox(
