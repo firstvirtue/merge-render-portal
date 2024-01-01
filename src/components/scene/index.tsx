@@ -136,14 +136,14 @@ const Box = (props) => {
 
   return (
     <mesh ref={ref}>
-      <Gltf src="/assets/model/eiffel.glb" scale={1} position={[0, -1, 0]} />
+      <Gltf src={props.src} scale={1} position={[0, -1, 0]} />
     </mesh>
   );
 };
 
 export const AppScene = () => {
 
-  console.log('Box:: ', Box)
+  console.log('Scene:: ')
   
   return (
     <>
@@ -155,9 +155,11 @@ export const AppScene = () => {
       <Physics>
         <Debug>
           <group>
-          <Box position={[-11, 1, 12]} userData={{ id: 'box-1', health: 80 }}/>
+          <Box src={"/assets/model/eiffel.glb"} position={[-11, 1, 12]} userData={{ id: 'box-1', health: 80 }}/>
+          <Box src={"/assets/model/colosseum.glb"} position={[-3, 1, 15]} userData={{ id: 'box-2', health: 80 }}/>
+          <Box src={"/assets/model/pisa.glb"} position={[-2.5, 1, 17]} userData={{ id: 'box-3', health: 80 }}/>
           </group>
-          <Terrain position={[-6, -1, 13]} />
+          <Terrain position={[16, -1, 13]} />
           
           <group position={[0, -1, 50]}>
             <Gltf src="/assets/model/terrain.004.glb" scale={1} position={[0, 0, 0]} />
