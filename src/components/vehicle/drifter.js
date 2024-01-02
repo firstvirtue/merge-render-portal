@@ -43,7 +43,7 @@ const Drifter = forwardRef(({ args = [0.5, 0.5, 1.4], mass = 1500, setVisible, .
         <group rotation={[0, 0, 0]}>
           <group rotation={[0, 0, 0]}>
             <group name="Frame" rotation={[0, 0, 0]}>
-            <Gltf src="/assets/model/jeep.glb" position={[0, -0.2, -0.14]} scale={[1, 1, 1.4]}/>
+            <Gltf castShadow src="/assets/model/jeep.glb" position={[0, -0.2, -0.14]} scale={[1, 1, 1.4]}/>
             </group>
           </group>
         </group>

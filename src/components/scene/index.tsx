@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { useEffect, useRef, useState, useMemo } from 'react'
 import { Canvas, extend, useFrame, useThree } from '@react-three/fiber'
-import { useCursor, MeshPortalMaterial, CameraControls, useGLTF, Gltf, Text, Sky, Cloud } from '@react-three/drei'
+import { Box, Plane, useCursor, MeshPortalMaterial, CameraControls, useGLTF, Gltf, Text, Sky, Cloud } from '@react-three/drei'
 import { useRoute, useLocation } from 'wouter'
 import { easing, geometry } from 'maath'
 import { suspend } from 'suspend-react'
@@ -131,17 +131,24 @@ const Bowl = ({ rotation }: Pick<TrimeshProps, 'rotation'>) => {
   )
 }
 
-const Box = (props) => {
+const Obje = (props) => {
   const [ref] = useCylinder(() => ({ mass: 0.3, args: [1, 1, 2, 16], ...props }));
 
   return (
     <mesh ref={ref}>
-      <Gltf src={props.src} scale={1} position={[0, -1, 0]} />
+      <Gltf castShadow src={props.src} scale={1} position={[0, -1, 0]} />
     </mesh>
   );
 };
 
 export const AppScene = () => {
+
+  const boxRef = useRef<Mesh>(null);
+  useFrame(() => {
+    boxRef.current.rotation.y += 0.004;
+    boxRef.current.rotation.x += 0.004;
+    boxRef.current.rotation.z += 0.004;
+  });
 
   console.log('Scene:: ')
   
@@ -149,26 +156,36 @@ export const AppScene = () => {
     <>
       <color attach="background" args={['#f0f0f0']} />        
       <ambientLight intensity={0.5} />
-      <directionalLight color="white" position={[0, 0, 5]} />
+      <directionalLight color="white" position={[0, 22, 15]} 
+      intensity={0.5}
+      castShadow
+      shadow-mapSize-width={1024}
+      shadow-mapSize-height={1024}
+      shadow-camera-far={50}
+      shadow-camera-left = {-20}
+      shadow-camera-right = {20}
+      shadow-camera-top = {20}
+      shadow-camera-bottom = {-20}
+      />
       <Sky />
 
       <Physics>
-        <Debug>
+      <Box ref={boxRef} castShadow position={[0, 0.5, 0]}></Box>
+        {/* <Debug> */}
           <group>
-          <Box src={"/assets/model/eiffel.glb"} position={[-11, 1, 12]} userData={{ id: 'box-1', health: 80 }}/>
-          <Box src={"/assets/model/colosseum.glb"} position={[-3, 1, 15]} userData={{ id: 'box-2', health: 80 }}/>
-          <Box src={"/assets/model/pisa.glb"} position={[-2.5, 1, 17]} userData={{ id: 'box-3', health: 80 }}/>
+          <Obje src={"/assets/model/eiffel.glb"} position={[-11, 1, 12]} userData={{ id: 'box-1', health: 80 }}/>
+          <Obje src={"/assets/model/colosseum.glb"} position={[-3, 1, 15]} userData={{ id: 'box-2', health: 80 }}/>
+          <Obje src={"/assets/model/pisa.glb"} position={[-2.5, 1, 17]} userData={{ id: 'box-3', health: 80 }}/>
           </group>
           <Terrain position={[16, -1, 13]} />
           
           <group position={[0, -1, 50]}>
             <Gltf src="/assets/model/terrain.004.glb" scale={1} position={[0, 0, 0]} />
             <Gltf src="/assets/model/terrain.002.glb" scale={1} position={[0, 0, 0]} />
-            {/* <Gltf src="/assets/model/eiffel.glb" scale={1} position={[0, 0, 0]} /> */}
-            <Gltf src="/assets/model/europe.glb" scale={1} position={[0, 0, 0]} />
+            <Gltf receiveShadow src="/assets/model/europe.glb" scale={1} position={[0, 0, 0]} />
           </group>
         <Vehicle position={[0, 2, 0]} rotation={[0, -Math.PI / 4, 0]} angularVelocity={[0, 1, 0]} wheelRadius={2} />
-        </Debug>
+        {/* </Debug> */}
       </Physics>
       
       {/* <Rig /> */}

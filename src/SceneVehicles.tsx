@@ -17,7 +17,10 @@ export const App = () => {
   
   return (
     <div style={{height: '90vh'}}>
-    <Canvas id='freg' camera={{ fov: 70, position: [0, 0, 20] }} eventSource={document.getElementById('root')} eventPrefix="client">
+    <Canvas 
+      colorManagement
+      shadows // highlight-lines
+      id='freg' camera={{ fov: 70, position: [0, 0, 20] }} eventSource={document.getElementById('root')} eventPrefix="client">
       
       <AppScene />
       <Rig />
