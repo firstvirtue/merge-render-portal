@@ -82,10 +82,11 @@ const Terrain = ({ position }: Pick<TrimeshProps, 'position'>) => {
   return (
 
     <mesh
+      receiveShadow
       ref={ref}
       geometry={geometry}
     >
-      <meshStandardMaterial color={'white'} />
+      <meshStandardMaterial color={'green'} />
     </mesh>
 
     // <primitive
