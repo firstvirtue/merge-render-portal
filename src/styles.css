@@ -83,11 +83,14 @@ header .left strong {
 }
 
 header .left .dot {
-  font-size: 2.4rem;
+  position: relative;
+  font-size: 4rem;
   color: #EE536B;
   color: #222;
+  color: rgb(224, 109, 114);
   line-height: 0;
   margin-left: 0.12em;
+  bottom: 1px;
   /* letter-spacing: 0.02em; */
 }
 
@@ -99,6 +102,7 @@ header .left span {
 
 .menu-container {
   display: flex;
+  align-items: center;
   gap: 3rem;
   width: fit-content;
   position: absolute;
@@ -122,11 +126,11 @@ header .left span {
   position: absolute;
   right: 0;
   top: 50%;
-  transform: translate(130%, -50%);
-  width: 2rem;
-  height: 2rem;
-  border: 1px solid black;
-  border-radius: 50%;
+  transform: translate(130%, -55%) rotate(-45deg);
+  width: 2.4rem;
+  height: 2.4rem;
+
+  background: url(./icons/arrow-circle-lined.svg) no-repeat center;
 }
 
 .slogan {
@@ -134,4 +138,5 @@ header .left span {
   font-size: 10rem;
   text-align: center;
   padding-top: 5rem;
+  padding-bottom: 5rem;
 }

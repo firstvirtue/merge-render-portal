@@ -15,32 +15,32 @@ const medium = import('@pmndrs/assets/fonts/inter_medium.woff')
 
 export const App = () => {
   return (
-    <div style={{height: '300vh'}}>
-      <div style={{height: '90vh'}}>
-      <Canvas camera={{ fov: 70, position: [0, 0, 20] }} eventSource={document.getElementById('root')} eventPrefix="client">
-        <color attach="background" args={['#f0f0f0']} />
-        <Frame id="01" name={`pick\nles`} author="Omar Faruq Tawsif" bg="#e4cdac" position={[-1.15, 0, 0]} rotation={[0, 0.5, 0]}>
-          <group>
-            <Sky />
-            {/* <FBOParticles /> */}
-            <FisheyeScene />
-            <Gltf src="pickles_3d_version_of_hyuna_lees_illustration-transformed.glb" scale={8} position={[0, -0.7, -2]} />
-          </group>
-        </Frame>
-        <Frame id="02" name="tea" author="Omar Faruq Tawsif" position={[1, 0, 0]}>
-          <AppScene />
-        </Frame>
-        {/* <Frame id="03" name="still" author="Omar Faruq Tawsif" bg="#d1d1ca" position={[2.15, -1, 0]} rotation={[0, -0.5, 0]}>
-          <Gltf src="still_life_based_on_heathers_artwork-transformed.glb" scale={2} position={[0, -0.8, -4]} />
-        </Frame> */}
-        <Rig />
-      </Canvas>
+    <div>
+      <div style={{height: '100vh'}}>
+        {/* <Canvas 
+          colorManagement
+          shadows // highlight-lines
+          camera={{ fov: 70, position: [0, 0, 20] }} eventSource={document.getElementById('root')} eventPrefix="client">
+          <color attach="background" args={['#f0f0f0']} />
+          <Frame id="01" name={`pick\nles`} author="Omar Faruq Tawsif" bg="#e4cdac" position={[-1.15, 0, 0]} rotation={[0, 0, 0]}>
+            <group>
+              <Sky />
+              <FBOParticles />
+              <FisheyeScene />
+              <Gltf src="pickles_3d_version_of_hyuna_lees_illustration-transformed.glb" scale={8} position={[0, -0.7, -2]} />
+            </group>
+          </Frame>
+          <Frame id="02" name={`Hello\nWorld`} author="seoeunggyo5" position={[1, 0, 0]}>
+            <AppScene />
+          </Frame>
+          <Rig />
+        </Canvas> */}
       </div>
 
       <p className='slogan'>
         Hello world <br/>
         No Code No Life <br/>
-        Generate AI <br/>Change the World!
+        Generative AI <br/>Change the World!
       </p>
     </div>
   )

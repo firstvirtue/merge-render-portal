@@ -10,7 +10,7 @@ export function Header() {
           <strong>
             Lee
             <span className="dot">.</span>
-            <span>Contact</span>
+            {/* <span>Contact</span> */}
           </strong>
         </a>
       </div>

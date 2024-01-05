@@ -47,7 +47,7 @@ const Vehicle = ({ radius = 0.2, width = 0.3, height = 0, front = 0.38, back = -
     indexUpAxis: 1
   }));
 
-  const { yaw } = useFollowCam(chassis, [0, 3, 0.5])
+  // const { yaw } = useFollowCam(chassis, [0, 3, 0.5])
 
   const resetCar = () => {
     chassis.current.api.position.set(0, 0.5, 0);
