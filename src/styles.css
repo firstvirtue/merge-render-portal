@@ -130,7 +130,8 @@ header .left span {
   width: 2.4rem;
   height: 2.4rem;
 
-  background: url(./icons/arrow-circle-lined.svg) no-repeat center;
+  border-radius: 50%;
+  background: #B6F172 url(./icons/arrow-circle-lined.svg) no-repeat center;
 }
 
 .slogan {
@@ -138,15 +139,20 @@ header .left span {
   font-size: 10rem;
   text-align: center;
   padding-top: 5rem;
-  padding-bottom: 5rem;
+  padding-bottom: 10rem;
+}
+
+.spacer {
+  height: 5vh;
 }
 
 .footer-inner {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  padding: 2rem 4rem;
-  padding-bottom: 4rem;
+  padding: 0 8rem;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
 }
 
 .contact-wrap {
@@ -158,7 +164,7 @@ header .left span {
 .contact-wrap a small {
   display: block;
   font-size: 1.3rem;
-  padding-top: 1em;
+  padding-top: 2em;
 }
 
 .social-wrap {
@@ -168,7 +174,7 @@ header .left span {
 
 .social-wrap a {
   display: block;
-  background: #f9f9f9;
+  background: #E8E8E8;
   padding: 1rem;
   border-radius: 50%;
 }

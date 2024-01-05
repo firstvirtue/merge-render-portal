@@ -49,6 +49,7 @@ function Root() {
       <img src='/assets/img/sc-no-menu.png' width={'70%'} />
     </div>
 
+    <div className='spacer'></div>
     <Footer />
     </>
   )
