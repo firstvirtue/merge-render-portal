@@ -140,3 +140,43 @@ header .left span {
   padding-top: 5rem;
   padding-bottom: 5rem;
 }
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 2rem 4rem;
+  padding-bottom: 4rem;
+}
+
+.contact-wrap {
+  display: flex;
+  flex-direction: column;
+  font-size: 2rem;
+}
+
+.contact-wrap a small {
+  display: block;
+  font-size: 1.3rem;
+  padding-top: 1em;
+}
+
+.social-wrap {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.social-wrap a {
+  display: block;
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 50%;
+}
+
+.social-wrap img {
+  display: block;
+}
+
+.social-icon {
+  width: 2.4rem;
+}
