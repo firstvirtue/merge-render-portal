@@ -38,9 +38,9 @@ function Root() {
         </a>
         <div style={{ position: 'absolute', bottom: 40, right: 40, fontSize: '13px' }}>15/06/2023</div>
         <Logo style={{ position: 'absolute', bottom: 40, left: 40, width: 30 }} />
-        <a style={{ position: 'absolute', top: 40, left: 40, fontSize: '13px' }} href="#" onClick={() => setLocation('/')}>
+        {/* <a style={{ position: 'absolute', top: 40, left: 40, fontSize: '13px' }} href="#" onClick={() => setLocation('/')}>
           {params ? '< back' : 'double click to enter portal'}
-        </a>
+        </a> */}
       </div>{' '}
     </>
   )

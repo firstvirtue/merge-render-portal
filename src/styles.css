@@ -11,10 +11,12 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
+  font-size: 62.5%;
 }
 
 body {
   background: #f0f0f0;
+  /* background-color: black; */
   color: black;
   font-family: 'Mori', 'Pretendard', sans-serif;
 }
@@ -61,17 +63,52 @@ header {
   z-index: 1;
 }
 
+header .left a {
+  display: block;
+  position: relative;
+  top: 2rem;
+  left: 5rem;
+  width: fit-content;
+  font-size: 1.8rem;
+  letter-spacing: -0.04em;
+  line-height: 1;
+
+  border-bottom: 5px solid #000;
+}
+
+header .left strong {
+  display: block;
+  position: relative;
+  font-weight: 700;
+}
+
+header .left .dot {
+  font-size: 2.4rem;
+  color: #EE536B;
+  color: #222;
+  line-height: 0;
+  margin-left: 0.12em;
+  /* letter-spacing: 0.02em; */
+}
+
+header .left span {
+  color: #222;
+  font-size: 1.3rem;
+  font-weight: 400;
+}
+
 .menu-container {
   display: flex;
-  gap: 2rem;
+  gap: 3rem;
   width: fit-content;
   position: absolute;
   right: 5rem;
   top: 2rem;
   /* border: 1px solid black; */
   border-radius: 35px;
-  padding: 1rem 4rem 1rem 2rem;
+  padding: 1.5rem 5rem 1.5rem 3rem;
   background-color: rgba(255, 255, 255, 0.5);
+  font-size: 1.6rem;
   backdrop-filter: blur(25px);
 }
 
@@ -86,15 +123,15 @@ header {
   right: 0;
   top: 50%;
   transform: translate(130%, -50%);
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 2rem;
+  height: 2rem;
   border: 1px solid black;
   border-radius: 50%;
 }
 
 .slogan {
   font-weight: 700;
-  font-size: 7rem;
+  font-size: 10rem;
   text-align: center;
   padding-top: 5rem;
 }
